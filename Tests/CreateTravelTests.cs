@@ -214,7 +214,7 @@ public class CreateTravelTests                  // Класс с тестами
         Console.WriteLine($"Выбран город: {cityValue}");
 
 
-      /*  var cities = new[]
+      /**  var cities = new[]
          {
                  new { Name = "Москва",      Type = "Целевой город",    Date = DateTime.Today.AddDays(2) },
                  new { Name = "Казань",      Type = "Транзитный город", Date = DateTime.Today.AddDays(5) },
