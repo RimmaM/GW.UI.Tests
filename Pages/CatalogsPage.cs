@@ -18,20 +18,17 @@ public class CatalogsPage
     private ILocator StatusSelector => _page.Locator(".selector-field");                               // Выпадающий список "Статус"
     private ILocator ConfirmedStatus => _page.Locator(".option-item[data-id='Confirmed']");            // Пункт "Подтвержден"
     private ILocator ResetButton => _page.GetByRole(AriaRole.Button, new() { Name = "Сбросить все" }); // Кнопка "Сбросить все"
+    private ILocator ClearSearchButton => _page.Locator(".field-base-icons .icon-close"); // Кнопка очистки поля поиска
 
-    /// <summary>
-    /// Открывает страницу сотрудников
-    /// </summary>
+    // Открывает страницу сотрудников
     public async Task Open()
     {
         await _page.GotoAsync("https://gw-exp.dev.artintech.ru/Catalogs"); // Переходим на страницу сотрудников
-        //await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);           // Ждем полной загрузки страницы
+        Console.WriteLine($"URL: {_page.Url}");                            // Выводим текущий адрес страницы
         await SearchField.WaitForAsync();                                  // Ждем появления поля поиска
     }
 
-    /// <summary>
-    /// Выбирает статус "Подтвержден"
-    /// </summary>
+    // Выбирает статус "Подтвержден"
     public async Task SelectConfirmedStatus()
     {
         await StatusSelector.ClickAsync();                           // Открываем список
@@ -39,36 +36,31 @@ public class CatalogsPage
         await ConfirmedStatus.ClickAsync();                          // Выбираем "Подтвержден"
     }
 
-    /// <summary>
-    /// Сбрасывает все фильтры
-    /// </summary>
+    // Сбрасывает все фильтры
     public async Task ResetFilters()
     {
         await ResetButton.ClickAsync();                                     // Нажимаем кнопку "Сбросить все"
-        //await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);           // Ждем обновления списка
         await SearchField.WaitForAsync();      // Ждем, пока поле поиска снова станет доступным
         Console.WriteLine(await SearchField.InputValueAsync());
     }
 
-    /// <summary>
-    /// Выполняет поиск сотрудника
-    /// </summary>
-    /// <param name="employeeName">Фамилия сотрудника</param>
-    public async Task SearchEmployee(string employeeName)
+    // Выполняет поиск сотрудника    
+    public async Task SearchEmployee(string employeeName)     // <param name="employeeName">Фамилия сотрудника</param>
     {
-        await SearchField.ClearAsync();                                     // Очищаем поле поиска
-        await SearchField.FillAsync(employeeName);                          // Вводим фамилию сотрудника
-       // await SearchField.PressAsync("Enter");                              // Запускаем поиск
-        //await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);           // Ждем обновления списка
-        await _page.WaitForTimeoutAsync(1000);     // Даем странице обновить список
+        await SearchField.ClearAsync();            // Очищаем поле поиска
+        await SearchField.FillAsync(employeeName); // Вводим фамилию сотрудника
+        await _page.WaitForTimeoutAsync(1000);     // Ждем обновления списка
     }
 
+    // Очищает поле поиска нажатием на крестик
+    public async Task ClearSearch()
+    {
+        await ClearSearchButton.ClickAsync();      // Нажимаем на крестик
+        await _page.WaitForTimeoutAsync(500);      // Ждем очистки поля
+    }
 
-    /// <summary>
-    /// Открывает карточку сотрудника по фамилии
-    /// </summary>
-    /// <param name="lastName">Фамилия сотрудника</param>
-    public async Task OpenEmployee(string lastName)
+    // Открывает карточку сотрудника по фамилии
+    public async Task OpenEmployee(string lastName)                 //<param name="lastName">Фамилия сотрудника</param>
     {
         var employee = _page.Locator(".list-item")                                   // Находим все строки списка сотрудников
             .Filter(new() { HasText = lastName })                                    // Оставляем строку с нужной фамилией
@@ -78,17 +70,13 @@ public class CatalogsPage
         await _page.WaitForURLAsync("**/Catalogs/EmployeeView/**");                  // Ждем открытия страницы сотрудника
     }
 
-    /// <summary>
-    /// Возвращает значение поля поиска
-    /// </summary>
+    // Возвращает значение поля поиска
     public async Task<string> GetSearchValue()
     {
         return await SearchField.InputValueAsync(); // Получаем текст из поля поиска
     }
 
-    /// <summary>
-    /// Возвращает текущий адрес страницы
-    /// </summary>
+    // Возвращает текущий адрес страницы
     public string GetCurrentUrl()
     {
         return _page.Url; // Возвращаем адрес открытой страницы

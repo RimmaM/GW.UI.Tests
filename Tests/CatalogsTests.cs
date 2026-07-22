@@ -36,25 +36,28 @@ public class CatalogsTests
     [Test]
     public async Task Search_Confirmed_Employee()
     {
-        await _loginPage.Open();                                                                   // Открываем страницу авторизации
-        await _loginPage.Login(Users.Email, Users.Password);                                      // Выполняем вход
+        await _loginPage.Open();                                      // Открываем страницу входа
+        await _loginPage.Login(Users.Email, Users.Password);          // Авторизуемся
+        await _page.WaitForURLAsync("**/Travels");                    // Ждем открытия страницы после входа
+        await _catalogsPage.Open();                                                   // Переходим на страницу сотрудников
+        Console.WriteLine($"Переход в список Сотрудников");
 
-        await _page.WaitForURLAsync("**/Travels");                                                 // Ждем успешной авторизации
+        await _catalogsPage.SearchEmployee("Родионова");                              // Вводим фамилию в поиск
+        await _catalogsPage.ClearSearch();                                            // Очищаем поле поиска крестиком
+        Assert.That(await _catalogsPage.GetSearchValue(), Is.EqualTo(string.Empty));  // Проверяем, что поле поиска пустое
+        Console.WriteLine($"Поиск + удаление введеного имени в поле поиска");
 
-        await _catalogsPage.Open();                                                                // Переходим на страницу сотрудников
+        await _catalogsPage.SelectConfirmedStatus();                                  // Выбираем статус "Подтвержден"
+        await _catalogsPage.ResetFilters();                                           // Сбрасываем фильтры
+        Assert.That(await _catalogsPage.GetSearchValue(), Is.EqualTo(string.Empty));  // Проверяем, что после сброса поиск снова пустой
 
-        await _catalogsPage.SelectConfirmedStatus();                                               // Выбираем статус "Подтвержден"
+        await _catalogsPage.SearchEmployee("Родионова");                              // Снова ищем сотрудника
 
-        await _catalogsPage.ResetFilters();                                                        // Сбрасываем фильтры
-
-        Assert.That(await _catalogsPage.GetSearchValue(), Is.EqualTo(""));                         // Проверяем, что поле поиска очищено
-
-        await _catalogsPage.SearchEmployee("Родионова");                                           // Ищем сотрудника Родионова
-
-        await _catalogsPage.OpenEmployee("Родионова");                                             // Открываем карточку сотрудника
+        await _catalogsPage.OpenEmployee("Родионова");                                // Открываем карточку сотрудника
 
         Assert.That(
             _catalogsPage.GetCurrentUrl(),
-            Does.Contain("/Catalogs/EmployeeView/"));                                              // Проверяем, что открылась карточка сотрудника
+            Does.Contain("/Catalogs/EmployeeView/"));                                 // Проверяем, что открылась карточка сотрудника}
     }
+
 }
