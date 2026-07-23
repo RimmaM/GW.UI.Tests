@@ -2,13 +2,10 @@
 
 namespace GW.UI.Tests.Pages;
 
-/// <summary>
-/// Страница "Сотрудники"
-/// </summary>
+// Страница "Сотрудники"
 public class CatalogsPage
 {
     private readonly IPage _page; // Ссылка на открытую страницу браузера
-
     public CatalogsPage(IPage page) // Конструктор страницы
     {
         _page = page;
@@ -40,7 +37,7 @@ public class CatalogsPage
     public async Task ResetFilters()
     {
         await ResetButton.ClickAsync();                                     // Нажимаем кнопку "Сбросить все"
-        await SearchField.WaitForAsync();      // Ждем, пока поле поиска снова станет доступным
+        await SearchField.WaitForAsync();                                   // Ждем, пока поле поиска снова станет доступным
         Console.WriteLine(await SearchField.InputValueAsync());
     }
 
