@@ -41,16 +41,16 @@ public class DivisionsTests
     public async Task Open_Division_Manager()
     {
         await _loginPage.Open();                                               // Открываем страницу входа
-
         await _loginPage.Login(Users.Email, Users.Password);                   // Авторизуемся
-
         await _page.WaitForURLAsync("**/Travels");                             // Ждем открытия главной страницы
-
         await _divisionsPage.Open();                                         // Открываем страницу подразделений
+        Console.WriteLine($"Открыли страницу подразделений");
 
         await _divisionsPage.ExpandDivision("Головной офис г. Чебоксары");   // Раскрываем головной офис
+        Console.WriteLine($"Расскрыли Головной офис г. Чебоксары");
 
         await _divisionsPage.OpenManager("Исрафилов");                       // Открываем карточку руководителя
+        Console.WriteLine($"Открываем карточку руководителя");
 
         Assert.That(
             _divisionsPage.GetCurrentUrl(),

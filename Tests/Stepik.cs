@@ -6,7 +6,7 @@ namespace GW.UI.Tests.Tests;                    // Пространство им
 
 class Stepik
 {
-    [Test]
+ //   [Test]
     public void Main() 
     {
         string a = "Hello, C#!";

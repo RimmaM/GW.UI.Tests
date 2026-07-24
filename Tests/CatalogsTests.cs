@@ -45,15 +45,17 @@ public class CatalogsTests
         await _catalogsPage.SearchEmployee("Родионова");                              // Вводим фамилию в поиск
         await _catalogsPage.ClearSearch();                                            // Очищаем поле поиска крестиком
         Assert.That(await _catalogsPage.GetSearchValue(), Is.EqualTo(string.Empty));  // Проверяем, что поле поиска пустое
-        Console.WriteLine($"Поиск + удаление введеного имени в поле поиска");
+        Console.WriteLine($"Поиск Сотрудника + удаление введеного имени в поле поиска через крестик [х]");
 
         await _catalogsPage.SelectConfirmedStatus();                                  // Выбираем статус "Подтвержден"
         await _catalogsPage.ResetFilters();                                           // Сбрасываем фильтры
+        Console.WriteLine($"Выбор статуса Подтвержден + сбрасывание фильтра");
+
         Assert.That(await _catalogsPage.GetSearchValue(), Is.EqualTo(string.Empty));  // Проверяем, что после сброса поиск снова пустой
 
         await _catalogsPage.SearchEmployee("Родионова");                              // Снова ищем сотрудника
-
         await _catalogsPage.OpenEmployee("Родионова");                                // Открываем карточку сотрудника
+        Console.WriteLine($"Поиск сотрудника и переход на страницу Сотрудника");
 
         Assert.That(
             _catalogsPage.GetCurrentUrl(),

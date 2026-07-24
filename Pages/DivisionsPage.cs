@@ -13,7 +13,7 @@ public class DivisionsPage
 
     public async Task Open()    // Открывает страницу подразделений
     {
-        await _page.GotoAsync("https://gw-exp.dev.artintech.ru/Catalogs/Company/Divisions"); // Переходим на страницу подразделений
+        await _page.GotoAsync("https://gw-exp.dev.artintech.ru/Catalogs/Company/Divisions"); 
     }
 
     public async Task ExpandDivision(string divisionName)                   // Раскрывает подразделение по названию
