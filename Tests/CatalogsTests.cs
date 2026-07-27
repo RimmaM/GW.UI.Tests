@@ -34,6 +34,7 @@ public class CatalogsTests
     }
 
     [Test]
+    [Category("Catalogs")]
     public async Task Search_Confirmed_Employee()
     {
         await _loginPage.Open();                                      // Открываем страницу входа

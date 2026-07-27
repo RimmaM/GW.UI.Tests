@@ -7,6 +7,7 @@ namespace GW.UI.Tests.Tests;        // Пространство имен для 
 public class ForgotPasswordTests    // Класс с тестами восстановления пароля
 {
     [Test]                          // Атрибут NUnit: это тестовый метод
+    [Category("Login")]
     public async Task Send_Reset_Password_Link_Test()
     {
         using var playwright =

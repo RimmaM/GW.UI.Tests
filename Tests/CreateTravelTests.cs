@@ -61,7 +61,8 @@ public class CreateTravelTests                  // Класс с тестами
 
 
 
-    [Test]                                                               // Тест закрытия диалога создания АО
+    [Test]
+    [Category("Travel")] // Тест закрытия диалога создания АО
     public async Task Dialog_Closes_By_Close_Button()                    // Проверяем закрытие по крестику
     {
         await _travelsPage.OpenCreateTravelForm();                        // Открываем диалог
@@ -90,7 +91,8 @@ public class CreateTravelTests                  // Класс с тестами
     }
 
 
-     [Test]                                                               // Тест
+     [Test]
+    [Category("Travel")]// Тест
     public async Task Dialog_Closes_By_Cancel_Button()                   // Проверяем кнопку Отменить
     {
         await _travelsPage.OpenCreateTravelForm();                        // Открываем диалог
@@ -109,7 +111,8 @@ public class CreateTravelTests                  // Класс с тестами
     }
 
 
-    [Test]                                                               // Тест
+    [Test]
+    [Category("Travel")]// Тест
     public async Task Create_Travel_If_Not_Exists()                     // Проверяем создание поездки через кнопку Сохранить
     {
         Console.WriteLine(
@@ -180,6 +183,7 @@ public class CreateTravelTests                  // Класс с тестами
     }
 
     [Test]
+    [Category("Travel")]
     public async Task Edit_Last_Created_Travel()                    // Редактируем последнюю созданную поездку
     {
         var travelId =

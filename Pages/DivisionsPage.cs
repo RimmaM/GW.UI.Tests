@@ -11,6 +11,16 @@ public class DivisionsPage
         _page = page;
     }
 
+    public async Task OpenCatalogs()
+    {
+        await _page.GetByText("Справочники").ClickAsync();
+    }
+
+    public async Task OpenDivisions()
+    {
+        await _page.GetByText("Подразделения").ClickAsync();
+    }
+
     public async Task Open()    // Открывает страницу подразделений
     {
         await _page.GotoAsync("https://gw-exp.dev.artintech.ru/Catalogs/Company/Divisions"); 

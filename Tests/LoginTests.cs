@@ -7,7 +7,8 @@ namespace GW.UI.Tests.Tests;        // Пространство имен для 
 
 public class LoginTests             // Класс с тестами авторизации
 {
-   // [Test]                          // Атрибут NUnit: это тестовый метод
+    [Test]                          // Атрибут NUnit: это тестовый метод
+    [Category("Login")]
     public async Task Positive_Login_Test()
     {
         using var playwright =
