@@ -12,6 +12,16 @@ public class PositionsPage            // Класс страницы "Орган
         _page = page;
     }
 
+    public async Task OpenCatalogs()
+    {
+        await _page.GetByText("Справочники").ClickAsync();
+    }
+
+    public async Task OpenPositions()
+    {
+        await _page.GetByText("Должности").ClickAsync();
+    }
+
     public async Task Open()    // Открывает страницу организаций
     {
         await _page.GotoAsync("https://gw-exp.dev.artintech.ru/Catalogs/Positions");

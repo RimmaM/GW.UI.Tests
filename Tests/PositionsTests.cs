@@ -45,7 +45,11 @@ public class PositionsTests
         await _loginPage.Open();                                             // Авторизация
         await _loginPage.Login(Users.Email, Users.Password);
         await _page.WaitForURLAsync("**/Travels");
-        await _positionsPage.Open();                                    // Переход на страницу организаций
+        await _positionsPage.OpenCatalogs();              // Нажимаем "Справочники"
+        Console.WriteLine($"Переход в список Сотрудников");
+
+        await _positionsPage.Open();                                    // Переход на страницу должностей
+        Console.WriteLine($"Переход в список Должностей");
         Console.WriteLine(await _page.Locator(".list-item").CountAsync());  // Проверяем, что появился список
 
 

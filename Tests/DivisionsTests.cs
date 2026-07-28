@@ -45,14 +45,16 @@ public class DivisionsTests
         await _loginPage.Login(Users.Email, Users.Password);                   // Авторизуемся
         await _page.WaitForURLAsync("**/Travels");                             // Ждем открытия главной страницы
         await _divisionsPage.OpenCatalogs();              // Нажимаем "Справочники" 
+        Console.WriteLine($"Переход в список Сотрудников");
+
         await _divisionsPage.OpenDivisions();             // Нажимаем "Подразделения"
-       Console.WriteLine($"Открыли страницу подразделений");
+        Console.WriteLine($"Переход на страницу подразделений");
 
         await _divisionsPage.ExpandDivision("Головной офис г. Чебоксары");   // Раскрываем головной офис
-        Console.WriteLine($"Расскрыли Головной офис г. Чебоксары");
+        Console.WriteLine($"Расскрытие > Головной офис г. Чебоксары");
 
         await _divisionsPage.OpenManager("Исрафилов");                       // Открываем карточку руководителя
-        Console.WriteLine($"Открываем карточку руководителя");
+        Console.WriteLine($"Переход в карточку руководителя");
 
         Assert.That(
             _divisionsPage.GetCurrentUrl(),

@@ -49,9 +49,12 @@ public class OrganizationsTests
         await _loginPage.Login(Users.Email, Users.Password);
         await _page.WaitForURLAsync("**/Travels");
         await _organizationsPage.OpenCatalogs();              // Нажимаем "Справочники"
-        await _organizationsPage.OpenOrganizations();             
-                                           
-        Console.WriteLine(await _page.Locator(".list-item").CountAsync());  // Проверяем, что появился список
+        Console.WriteLine($"Переход в список Сотрудников");
+
+        await _organizationsPage.OpenOrganizations();
+        Console.WriteLine($"Переход в список Организаций");
+
+        //Console.WriteLine(await _page.Locator(".list-item").CountAsync());  // Проверяем, что появился список
 
         
         await _organizationsPage.OpenFirstOrganization();                   // Открываем первую организацию
