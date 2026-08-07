@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace GW.UI.Tests.Tests;
 
 [TestFixture]
-public class CatalogsTests
+public class CatalogsTests // test
 {
     private IPlaywright _playwright;      // Экземпляр Playwright
     private IBrowser _browser;            // Экземпляр браузера
