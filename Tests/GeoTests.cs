@@ -39,7 +39,7 @@ public class GeoTests
     }
 
 
-   // [Test]
+   // [Test] //72 test
     [Category("Catalogs")]
     public async Task Create_Country()
     {
