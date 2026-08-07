@@ -7,13 +7,13 @@ namespace GW.UI.Tests.Tests;
 
 public class OrganizationsTests
 {
-    private IPlaywright _playwright;      // Playwright
-    private IBrowser _browser;            // Браузер
-    private IPage _page;                  // Вкладка браузера
+private IPlaywright _playwright;      // Playwright
+private IBrowser _browser;            // Браузер
+private IPage _page;                  // Вкладка браузера
 
-    private LoginPage _loginPage;         // Страница авторизации
-    private CatalogsPage _catalogsPage;
-    private OrganizationsPage _organizationsPage; // Страница подразделений
+private LoginPage _loginPage;         // Страница авторизации
+private CatalogsPage _catalogsPage;
+private OrganizationsPage _organizationsPage; // Страница подразделений
 
 
     [SetUp]
@@ -44,7 +44,7 @@ public class OrganizationsTests
     [Category("Catalogs")]
     public async Task Open_First_Organization()
     {
-       
+
         await _loginPage.Open();                                             // Авторизация
         await _loginPage.Login(Users.Email, Users.Password);
         await _page.WaitForURLAsync("**/Travels");
@@ -56,7 +56,7 @@ public class OrganizationsTests
 
         //Console.WriteLine(await _page.Locator(".list-item").CountAsync());  // Проверяем, что появился список
 
-        
+
         await _organizationsPage.OpenFirstOrganization();                   // Открываем первую организацию
         await _page.WaitForURLAsync("**/Catalogs/OrganizationEdit/**"); // Ждем открытия карточки
 

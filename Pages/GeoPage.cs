@@ -48,16 +48,14 @@ public class GeoPage            // Класс страницы "Организа
 
     public async Task OpenCountry(string countryName)
     {
-        var countryButton = _page.GetByRole(
-            AriaRole.Button,
-            new() { Name = countryName });
-
-        Console.WriteLine($"Кнопка найдена: {await countryButton.IsVisibleAsync()}");
-
-        await countryButton.ClickAsync();
-        Console.WriteLine("Клик выполнен");
-
-        await _page.WaitForTimeoutAsync(3000);
+        await _page
+            .GetByRole(AriaRole.Button, new()
+            {
+                Name = countryName,
+                Exact = true
+            })
+            .First
+            .ClickAsync();
     }
 
     public async Task OpenEditCountry(string countryName)
@@ -74,8 +72,13 @@ public class GeoPage            // Класс страницы "Организа
             .ClickAsync();
     }
 
-    public async Task<string> AddOneToCountryName()     // Дописывает "1" к названию страны
+    public async Task<string> AddOneToCountryName()
     {
+        await CountryNameField.WaitForAsync(new()
+        {
+            State = WaitForSelectorState.Visible
+        });
+
         string currentName = await CountryNameField.InputValueAsync();
 
         string newName = currentName + "1";
@@ -89,10 +92,15 @@ public class GeoPage            // Класс страницы "Организа
     {
         var countryRow = _page
             .Locator("div.list-item")
-            .Filter(new()               //оставляет только строку с Test-UI
+            .Filter(new()
             {
-                HasText = countryName
-            });
+                Has = _page.GetByRole(AriaRole.Button, new()
+                {
+                    Name = countryName,
+                    Exact = true
+                })
+            })
+            .First;
 
         await countryRow
             .Locator("button.button-icon-primary")

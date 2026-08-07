@@ -27,7 +27,7 @@ public static class GeoTestControl
     }
 
 
-    public static void SaveCountry(string countryName, string countryId)   // Сохраняет название последней созданной страны
+    public static void SaveCountry(string countryName)   // Сохраняет название последней созданной страны
     {
         File.WriteAllText(CountryFile, countryName);
     }

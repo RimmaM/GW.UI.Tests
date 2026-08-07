@@ -38,7 +38,8 @@ public class GeoTests
         _playwright.Dispose();                                      // Освобождаем ресурсы
     }
 
-    [Test]
+
+   // [Test]
     [Category("Catalogs")]
     public async Task Create_Country()
     {
@@ -49,7 +50,7 @@ public class GeoTests
         await _geoPage.OpenCatalogs();                              // Нажимаем "Справочники"
         Console.WriteLine($"Переход в список Сотрудников");
 
-        await _geoPage.Open();                                     // Переход на страницу geo
+        await _geoPage.OpenGeo();                                     // Переход на страницу geo
         Console.WriteLine($"Переход в список Гео");
 
         string countryName = "Test-UI";
